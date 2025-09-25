@@ -1,8 +1,9 @@
 <script setup>
 import { faker } from '@faker-js/faker'
-const fullname = faker.person.fullName()
+
 const firstname = faker.person.firstName()
 const lastname = faker.person.lastName()
+const fullname = faker.person.fullName({firstName: firstname, lastName:lastname})
 const job_title = faker.person.jobTitle()
 const bio = faker.lorem.lines(2)
 const username = faker.internet.username({firstName: firstname, lastName:lastname}).toLowerCase()
@@ -11,6 +12,7 @@ const username = faker.internet.username({firstName: firstname, lastName:lastnam
 
 <template>
 <!-- {{ fullname }} <br /> -->
+<RouterLink :to="{name: 'cardDetails', params: {id: username}}">
 <div class="border border-gray-400 rounded-xl shadow bg-gray-200 h-full">
 <img :src="faker.image.urlPicsumPhotos({category: 'cat'})" class="rounded-t-xl"/>
     <div class="p4">
@@ -19,5 +21,6 @@ const username = faker.internet.username({firstName: firstname, lastName:lastnam
     <p class="mb-3 font-normal text-gray-700">{{ bio }}</p>
   </div>
   </div>
+</RouterLink>
 
 </template>
